@@ -8,7 +8,8 @@ export const useQuizStore = defineStore('quiz', () => {
         questions: [],
         results: {},
         activeQuestion: null,
-        finished: false
+        finished: false,
+        image: ''
     })
 
     const activeQuestion = computed(() => state.questions[state.activeQuestion])
@@ -33,7 +34,7 @@ export const useQuizStore = defineStore('quiz', () => {
         return res
     })
 
-    const initialize = data =>{
+    const initialize = (data) =>{
         state.questions = state.questions.concat(data.questions)
         state.title = data.title
         state.description = data.description

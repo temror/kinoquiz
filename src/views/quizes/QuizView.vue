@@ -1,5 +1,6 @@
 <template>
-  <div class="wrapper"  :style="{background: `url('src/assets/images/data/${route.path.substring(1)}/bg.png')`}">
+  <div class="wrapper" ref="wrapper">
+    <img v-if="route.path.substring(1)==='vilnev'" src='@/assets/images/data/vilnev/bg.png' alt="dsfsdf" class="bg">
     <div class="header" v-if="store.state.activeQuestion===null">
       <h1>{{store.state.title}}</h1>
       <h2>{{store.state.description}}</h2>
@@ -41,11 +42,18 @@
 <script setup>
 import {ElRadioGroup, ElRadio, ElButton} from "element-plus";
 import {useQuizStore} from "@/stores/modules/quiz";
-import {onMounted} from "vue";
+import {computed, onMounted, reactive, ref} from "vue";
 import {data} from "@/data/data";
 import {useRoute, useRouter} from "vue-router";
 
 const store = useQuizStore()
+
+const state = reactive({
+  //так не работает
+  url1: '@/assets/images/bg.png',
+  //так работает на девсервере, но не работает в сборке
+  url2: 'src/assets/images/bg.png'
+})
 
 const router = useRouter()
 const route = useRoute()
@@ -68,6 +76,11 @@ onMounted(()=>{
 
 <style lang="scss" scoped>
 @import "@/assets/style/main.scss";
+.bg{
+  position: fixed;
+  min-width: 100vw;
+  z-index: -1;
+}
 .wrapper{
   height: 100%;
   @include flex-center;
