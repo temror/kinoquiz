@@ -35,7 +35,7 @@ export const useQuizStore = defineStore('quiz', () => {
     })
 
     const initialize = (data) =>{
-        state.questions = state.questions.concat(data.questions)
+        state.questions = [].concat(data.questions)
         state.title = data.title
         state.description = data.description
     }

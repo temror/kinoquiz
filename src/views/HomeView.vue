@@ -1,25 +1,49 @@
 <template>
-  <div>
+  <div class="main">
     <h1>Киноопросник</h1>
     <div class="tests">
       <router-link to="/vilnev">
-        <div class="tests__item">
-          <h1>Дени Вильнев</h1>
-          <img src="@/assets/images/data/vilnev/avatar.jpg" alt="jhkh">
-        </div>
+        <el-popover
+            placement="top-start"
+            title="Дэни Вильнев"
+            :width="200"
+            trigger="hover"
+            content="канадский режиссер"
+        >
+          <template #reference>
+            <div class="tests__img">
+              <img src="@/assets/images/data/vilnev/avatar.jpg" alt="jhkh">
+            </div>
+          </template>
+        </el-popover>
       </router-link>
     </div>
   </div>
 </template>
 
-<script>
-export default {}
+<script setup>
+import {ElPopover} from "element-plus";
 </script>
 
 <style lang="scss" scoped>
+.main {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  h1{
+    font-family: "GHEA Grapalat", sans-serif;
+    font-weight: lighter;
+    font-size: 40px;
+  }
+}
+
 .tests {
   display: flex;
-  a{
+
+  a {
     text-decoration: none;
     color: black;
   }
@@ -28,25 +52,30 @@ export default {}
     border: 2px solid #b9b9b9;
     border-radius: 15px;
     margin: 20px;
-    padding: 20px;
-    width: 20rem;
+    padding: 10px;
+    width: 16rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    h1{
-      font-family: "GHEA Grapalat", sans-serif;
-    }
-    p{
+
+    p {
       font-family: "GHEA Mariam", sans-serif;
     }
+  }
+    &__img {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    transition: 0.2s;
+    overflow: hidden;
+      margin-bottom: 20px;
     img {
-      width: 150px;
-      border-radius: 65px;
-      transition: 0.2s;
+      width: 100px;
     }
-    &:hover img{
+
+    &:hover img {
       scale: 1.05;
       transition: 0.2s;
     }
