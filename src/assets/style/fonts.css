@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'GHEA Grapalat';
+    src: url('../fonts/gheagrapalat.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'GHEA Mariam';
+    src: url('../fonts/gheamariam.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Tulpen One';
+    src: url('../fonts/tulpen-one_[allfont.ru].ttf');
+    font-weight: normal;
+    font-style: normal;
+}
