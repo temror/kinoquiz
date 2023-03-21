@@ -5,7 +5,7 @@
       <router-link to="/vilnev">
         <div class="tests__item">
           <h1>Дени Вильнев</h1>
-          <img src="src/assets/images/data/vilnev/avatar.jpg" alt="jhkh">
+          <img src="@/assets/images/data/vilnev/avatar.jpg" alt="jhkh">
         </div>
       </router-link>
     </div>
