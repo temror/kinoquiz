@@ -7,10 +7,11 @@
     </div>
     <div class="content" v-if="store.state.activeQuestion!==null">
       <div class="questions" v-if="!store.state.finished">
+        <p>Вопрос {{store.state.activeQuestion+1}}/{{store.state.questions.length}}</p>
         <h2>{{store.activeQuestion.text}}</h2>
         <div v-for="(variant) in store.activeQuestion.variants" class="questions__content">
-          <input type="radio" v-model="store.state.questions.filter(item => store.activeQuestion.text === item.text)[0].selectedAnswer" :value="variant">
-          <label>{{ variant }}</label>
+          <input type="radio" v-model="store.state.questions.filter(item => store.activeQuestion.text === item.text)[0].selectedAnswer" :value="variant" :id="variant">
+          <label :for="variant">{{ variant }}</label>
         </div>
         <div class="questions__buttons">
           <div class="questions__navigate">
@@ -23,14 +24,15 @@
       <div class="results" v-if="store.state.finished">
         <h1>Результаты</h1>
         <div class="results__check">
-          <p v-for="answer in store.result">
-            <span>Вопрос: {{answer.title}}</span><br>
-            <span >Правильный ответ: {{answer.rightAnswer}}</span><br>
-            <span :style="{color: answer.valid ? 'darkgreen' : '#e02d2d'}">Ваш ответ: {{answer.answer}}</span>
-          </p>
+          <div v-for="(answer,index) in store.result" style="margin-bottom: 30px" class="results__ques">
+            <span style="">Вопрос №{{index+1}}:</span>
+            <p style="font-size: 22px; margin-top: 10px">{{answer.title}}</p>
+            <p :style="{color: answer.valid ? 'rgb(42,169,45)' : 'rgb(171,42,42)'}"><span>Ваш ответ: </span>{{answer.answer}}</p>
+            <p v-if="!answer.valid"><span>Правильный ответ: </span>{{answer.rightAnswer}}</p>
+          </div>
         </div>
-        <p>Правильных ответов: {{store.answer.true}}</p>
-        <p>Неправильных ответов: {{store.answer.false}}</p>
+        <p style="padding-bottom: 10px">Результат: {{store.answer.true}}/{{store.state.questions.length}}</p>
+        <el-button type="primary" size="large" @click="exit">Выбрать другой тест</el-button>
       </div>
     </div>
   </div>
@@ -41,10 +43,17 @@ import {ElRadioGroup, ElRadio, ElButton} from "element-plus";
 import {useQuizStore} from "@/stores/modules/quiz";
 import {onMounted} from "vue";
 import {data} from "@/data/data";
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 
 const store = useQuizStore()
+
+const router = useRouter()
 const route = useRoute()
+
+const exit = () =>{
+  router.push('/')
+  store.exit()
+}
 
 const finish = ( ) =>{
   store.state.finished = true
@@ -86,10 +95,12 @@ onMounted(()=>{
   }
   .content{
     background-color: #ffffff;
-    padding: 10px 30px;
+    padding: 40px 50px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(1,1,1,0.3);
     width: 40rem;
+    max-height: 40rem;
+    overflow: scroll;
   }
   .questions{
     h2{
@@ -120,12 +131,25 @@ onMounted(()=>{
     }
   }
   .results{
+    h1{
+      color: #3b3b3b;
+      font-family: "Tulpen One", sans-serif;
+      font-weight: normal;
+      font-size: 2rem;
+    }
     &__check{
-      h1{
-        font-family: "Tulpen One", sans-serif;
-        font-size: 6rem;
-        font-weight: normal;
+      p{
+
       }
+      span{
+        font-size: 14px;
+        color: #a4a4a4;
+      }
+    }
+    &__ques{
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(1,1,1,0.1);
     }
   }
 }

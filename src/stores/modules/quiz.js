@@ -39,5 +39,11 @@ export const useQuizStore = defineStore('quiz', () => {
         state.description = data.description
     }
 
-    return { state, activeQuestion, finished, answer, initialize, result}
+    const exit = () =>{
+        state.activeQuestion = null
+        state.finished = false
+        state.questions = []
+    }
+
+    return { state, activeQuestion, finished, answer, initialize, result, exit}
 })
