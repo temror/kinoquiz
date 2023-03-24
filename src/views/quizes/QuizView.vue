@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper" ref="wrapper">
-    <img v-if="route.path.substring(1)==='vilnev'" src='@/assets/images/data/vilnev/bg.png' alt="dsfsdf" class="bg">
+    <BgComponent/>
     <div class="header" v-if="store.state.activeQuestion===null">
       <h1>{{store.state.title}}</h1>
       <h2>{{store.state.description}}</h2>
@@ -19,7 +19,7 @@
             <el-button @click="store.state.activeQuestion--" :disabled="store.state.activeQuestion===0">Назад</el-button>
             <el-button @click="store.state.activeQuestion++" :disabled="store.state.activeQuestion===store.state.questions.length-1">Вперед</el-button>
           </div>
-          <el-button type="success" v-if="store.finished&&store.state.activeQuestion===store.state.questions.length-1" @click="finish">Завершить</el-button>
+          <el-button type="success" v-if="store.finished&&store.state.activeQuestion===store.state.questions.length-1" @click="store.state.finished = true">Завершить</el-button>
         </div>
       </div>
       <div class="results" v-if="store.state.finished">
@@ -41,19 +41,13 @@
 
 <script setup>
 import {ElRadioGroup, ElRadio, ElButton} from "element-plus";
-import {useQuizStore} from "@/stores/modules/quiz";
+import {useQuizStore} from "@/stores/quiz";
 import {computed, onMounted, reactive, ref} from "vue";
 import {data} from "@/data/data";
 import {useRoute, useRouter} from "vue-router";
+import BgComponent from "@/components/BgComponent.vue";
 
 const store = useQuizStore()
-
-const state = reactive({
-  //так не работает
-  url1: '@/assets/images/bg.png',
-  //так работает на девсервере, но не работает в сборке
-  url2: 'src/assets/images/bg.png'
-})
 
 const router = useRouter()
 const route = useRoute()
@@ -63,14 +57,9 @@ const exit = () =>{
   store.exit()
 }
 
-const finish = ( ) =>{
-  store.state.finished = true
-  console.log(store.result)
-}
-
 onMounted(()=>{
   const dataStore = data[route.path.substring(1)]()
-  store.initialize(dataStore.vilnev)
+  store.initialize(dataStore.store)
 })
 </script>
 

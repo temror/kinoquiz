@@ -1,10 +1,10 @@
 import {computed, reactive} from 'vue'
 import {defineStore} from 'pinia'
 
-export const useVilnevStore = defineStore('vilnev', () => {
+export const useNolanStore = defineStore('nolan', () => {
     const store = reactive({
-        title: 'Дени Вильнёв',
-        description: 'От экзистенциальных драм до голливудских интеллектуальных блокбастеров',
+        title: 'Кристофер Нолан',
+        description: 'Патриарх жанра интеллектульного блокбастера',
         questions: [
             {
                 text: 'Как называется первый полнометражный фильм Дени Вильнева?',
