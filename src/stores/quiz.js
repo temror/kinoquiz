@@ -5,6 +5,8 @@ export const useQuizStore = defineStore('quiz', () => {
     const state = reactive({
         title: '',
         description: '',
+        background: '',
+        smallBackground: '',
         questions: [],
         results: {},
         activeQuestion: null,
@@ -37,6 +39,8 @@ export const useQuizStore = defineStore('quiz', () => {
     const initialize = (data) =>{
         state.questions = [].concat(data.questions)
         state.title = data.title
+        state.background = data.background
+        state.smallBackground = data.smallBackground
         state.description = data.description
     }
 

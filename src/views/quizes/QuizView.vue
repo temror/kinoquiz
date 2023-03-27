@@ -1,6 +1,6 @@
 <template>
+  <BgComponent/>
   <div class="wrapper" ref="wrapper">
-    <BgComponent/>
     <div class="header" v-if="store.state.activeQuestion===null">
       <h1>{{store.state.title}}</h1>
       <h2>{{store.state.description}}</h2>
@@ -49,6 +49,14 @@ import BgComponent from "@/components/BgComponent.vue";
 
 const store = useQuizStore()
 
+const log = () =>{
+  console.log('bg')
+}
+
+const state = reactive({
+  bgBig: false
+})
+
 const router = useRouter()
 const route = useRoute()
 
@@ -56,6 +64,8 @@ const exit = () =>{
   router.push('/')
   store.exit()
 }
+
+
 
 onMounted(()=>{
   const dataStore = data[route.path.substring(1)]()
@@ -68,6 +78,7 @@ onMounted(()=>{
 .bg{
   position: fixed;
   min-width: 100vw;
+  min-height: 100vh;
   z-index: -1;
 }
 .wrapper{

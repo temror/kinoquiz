@@ -2,17 +2,17 @@
   <div class="main">
     <h1>Киноопросник</h1>
     <div class="tests">
-      <router-link to="/vilnev">
+      <router-link v-for="item in store.store.themes" :to="'/'+item.url">
         <el-popover
             placement="top-start"
-            title="Дэни Вильнев"
+            :title="item.title"
             :width="200"
             trigger="hover"
-            content="канадский режиссер"
+            :content="item.description"
         >
           <template #reference>
             <div class="tests__img">
-              <img src="@/assets/images/data/vilnev/avatar.jpg" alt="jhkh">
+              <img :src="item.image" alt="jhkh">
             </div>
           </template>
         </el-popover>
@@ -23,6 +23,9 @@
 
 <script setup>
 import {ElPopover} from "element-plus";
+import {useMainStore} from "@/data/main/main";
+
+const store = useMainStore()
 </script>
 
 <style lang="scss" scoped>
@@ -70,7 +73,7 @@ import {ElPopover} from "element-plus";
     border-radius: 100px;
     transition: 0.2s;
     overflow: hidden;
-      margin-bottom: 20px;
+      margin: 15px;
     img {
       width: 100px;
     }

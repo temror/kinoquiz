@@ -5,6 +5,8 @@ export const useVilnevStore = defineStore('vilnev', () => {
     const store = reactive({
         title: 'Дени Вильнёв',
         description: 'От экзистенциальных драм до голливудских интеллектуальных блокбастеров',
+        background: 'https://clck.ru/33sscq',
+        smallBackground: 'src/assets/images/data/vilnev/min.jpg',
         questions: [
             {
                 text: 'Как называется первый полнометражный фильм Дени Вильнева?',

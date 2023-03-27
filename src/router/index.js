@@ -1,6 +1,6 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
 import HomeView from "@/views/HomeView.vue";
-import VilnevQuiz from "@/views/quizes/QuizView.vue";
+import Quiz from "@/views/quizes/QuizView.vue";
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -13,7 +13,13 @@ const router = createRouter({
     {
       path: '/vilnev',
       name: 'vilnev',
-      component: VilnevQuiz,
+      component: Quiz,
+      props: true
+    },
+    {
+      path: '/nolan',
+      name: 'nolan',
+      component: Quiz,
       props: true
     }
   ]
