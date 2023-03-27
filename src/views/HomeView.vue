@@ -12,7 +12,7 @@
         >
           <template #reference>
             <div class="tests__img">
-              <img :src="item.image" alt="jhkh">
+              <img :src="item.image" @load="state.loaded=false" alt="jhkh">
             </div>
           </template>
         </el-popover>
@@ -24,6 +24,18 @@
 <script setup>
 import {ElPopover} from "element-plus";
 import {useMainStore} from "@/data/main/main";
+import {reactive, watch} from "vue";
+
+const state = reactive({
+  loaded: true
+})
+
+watch(()=>state.loaded,()=>{
+  if(!state.loaded){
+    const images = document.getElementsByClassName('tests__img')
+    Array.prototype.forEach.call(images,item=>item.style.animation='none')
+  }
+})
 
 const store = useMainStore()
 </script>
@@ -36,7 +48,7 @@ const store = useMainStore()
   justify-content: center;
   flex-direction: column;
 
-  h1{
+  h1 {
     font-family: "GHEA Grapalat", sans-serif;
     font-weight: lighter;
     font-size: 40px;
@@ -67,20 +79,35 @@ const store = useMainStore()
       font-family: "GHEA Mariam", sans-serif;
     }
   }
-    &__img {
+
+  &__img {
     width: 100px;
     height: 100px;
     border-radius: 100px;
     transition: 0.2s;
     overflow: hidden;
-      margin: 15px;
+    margin: 15px;
+    background-color: #f5f5f5;
+    animation: bg 1s infinite;
+    box-shadow: 0 0 10px rgba(1,1,1,0.1);
     img {
       width: 100px;
     }
-
-    &:hover img {
+    &:hover {
       scale: 1.05;
       transition: 0.2s;
+    }
+  }
+
+  @keyframes bg {
+    0% {
+      background-color: #d0d0d0;
+    }
+    50% {
+      background-color: white;
+    }
+    100% {
+      background-color: #d0d0d0;
     }
   }
 }

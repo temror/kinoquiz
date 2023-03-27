@@ -40,22 +40,14 @@
 </template>
 
 <script setup>
-import {ElRadioGroup, ElRadio, ElButton} from "element-plus";
+import { ElButton} from "element-plus";
 import {useQuizStore} from "@/stores/quiz";
-import {computed, onMounted, reactive, ref} from "vue";
+import {onMounted} from "vue";
 import {data} from "@/data/data";
 import {useRoute, useRouter} from "vue-router";
 import BgComponent from "@/components/BgComponent.vue";
 
 const store = useQuizStore()
-
-const log = () =>{
-  console.log('bg')
-}
-
-const state = reactive({
-  bgBig: false
-})
 
 const router = useRouter()
 const route = useRoute()
