@@ -14,7 +14,7 @@ import {onMounted, reactive} from "vue";
 import {useRoute} from "vue-router";
 
 const state = reactive({
-  bgBig: false
+  bgBig: false,
 })
 
 const store = useQuizStore()
