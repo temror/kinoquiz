@@ -7,13 +7,13 @@ export const useMainStore = defineStore('main', () => {
             {
                 title: 'Дени Вильнёв',
                 description: 'От экзистенциальных драм до голливудских интеллектуальных блокбастеров',
-                image: 'https://clck.ru/33stZe',
+                image: 'avatar.jpg',
                 url: 'vilnev'
             },
             {
                 title: 'Кристофер Нолан',
                 description: 'Патриарх жанра интеллектульного блокбастера',
-                image: 'https://clck.ru/33stqm',
+                image: '88648.jpg',
                 url: 'nolan'
             },
         ]

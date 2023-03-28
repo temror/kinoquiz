@@ -12,7 +12,7 @@
         >
           <template #reference>
             <div class="tests__img">
-              <img :src="item.image" @load="state.loaded=false" alt="jhkh">
+              <img v-show="!state.loaded" :src="item.image" @load="state.loaded=false">
             </div>
           </template>
         </el-popover>
@@ -24,10 +24,13 @@
 <script setup>
 import {ElPopover} from "element-plus";
 import {useMainStore} from "@/data/main/main";
-import {reactive, watch} from "vue";
+import {onMounted, reactive, watch} from "vue";
+import axios from "axios";
+
 
 const state = reactive({
-  loaded: true
+  loaded: true,
+  contents: []
 })
 
 watch(()=>state.loaded,()=>{
@@ -38,6 +41,19 @@ watch(()=>state.loaded,()=>{
 })
 
 const store = useMainStore()
+
+onMounted(async ()=>{
+  store.store.themes.map(async item => {
+    await axios.get('https://cloud-api.yandex.net/v1/disk/resources?path=disk:/Фото для сайта/Киноквиз/'+ item.image,{
+      headers: {
+        Authorization: 'OAuth y0_AgAAAAA5gcUNAADLWwAAAADflrQT8yQrWUWlTgepDpQVrqxRZ4QSr-I'
+      }
+    }).then(res=>{
+      item.image = res.data.file
+    })
+    return item
+  })
+})
 </script>
 
 <style lang="scss" scoped>
