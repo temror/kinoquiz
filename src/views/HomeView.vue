@@ -12,7 +12,7 @@
         >
           <template #reference>
             <div class="tests__img">
-              <img v-show="!state.loaded" :src="item.image" @load="state.loaded=false">
+              <img v-show="!state.loaded" :src="item.image" @load="readyLoad">
             </div>
           </template>
         </el-popover>
@@ -27,6 +27,19 @@ import {useMainStore} from "@/data/main/main";
 import {onMounted, reactive, watch} from "vue";
 import axios from "axios";
 
+function load(){
+    let counter = 0
+    return function (){
+        if(counter < store.store.themes.length-1){
+            counter++
+        }
+        else{
+            state.loaded=false
+        }
+    }
+}
+
+const readyLoad = load()
 
 const state = reactive({
   loaded: true,
